@@ -53,14 +53,14 @@ main {
     color: #545353;
 }
 
-#progress-bar {
+.progress-bar {
     border-radius: 20px;
     height: 30px;
     background-color: rgb(247, 249, 246);
     margin-bottom: 30px;
 }
 
-#progress-value {
+.progress-value {
     border-radius: 20px;
     height: 100%;
     width: 30%;
@@ -72,11 +72,15 @@ main {
     padding: 0 20px;
 }
 
-#error-label {
+.error-label {
     color: rgb(243, 99, 99);
     font-size: 14px;
     margin: 0;
     display: none;
+}
+
+.show-error .error-label {
+    display: block;
 }
 
 .goal-container {
