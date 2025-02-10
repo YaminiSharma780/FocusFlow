@@ -18,22 +18,22 @@ const allProgressLabels = [
 const allGoals = JSON.parse(localStorage.getItem("allGoals")) || {
   first: {
     goalName: "",
-    completed: false,
+    completed: null,
   },
   second: {
     goalName: "",
-    completed: false,
+    completed: null,
   },
   third: {
     goalName: "",
-    completed: false,
+    completed: null,
   },
 };
 let completedGoalsCount = Object.values(allGoals).filter(
   (goal) => goal.completed
 ).length;
-progressValue.style.width = `${(completedGoalsCount / 3) * 100}%`;
-progressValue.textContent = `${completedGoalsCount}/3 Completed`;
+progressValue.style.width = `${(completedGoalsCount / inputFields.length) * 100}%`;
+progressValue.textContent = `${completedGoalsCount}/${inputFields.length} Completed`;
 progressBarLabel.textContent = `${allProgressLabels[completedGoalsCount]}`;
 
 if (completedGoalsCount == 0) {
@@ -90,8 +90,8 @@ checkBoxList.forEach((checkbox) => {
         (goal) => goal.completed
       ).length;
 
-      progressValue.style.width = `${(completedGoalsCount / 3) * 100}%`;
-      progressValue.textContent = `${completedGoalsCount}/3 Completed`;
+      progressValue.style.width = `${(completedGoalsCount / inputFields.length) * 100}%`;
+      progressValue.textContent = `${completedGoalsCount}/${inputFields.length} Completed`;
       progressBarLabel.textContent = `${allProgressLabels[completedGoalsCount]}`;
       if (completedGoalsCount == 0) {
         progressValue.style.padding = 0;
