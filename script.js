@@ -13,7 +13,22 @@ const allProgressLabels = [
   "Whoa! You just completed all the goals, time for chill :D",
 ];
 
-const allGoals = JSON.parse(localStorage.getItem("allGoals")) || {};
+// when we are sending empty object {} then we will get error 
+// in this code -->> input.value = allGoals[input.id].goalName;
+const allGoals = JSON.parse(localStorage.getItem("allGoals")) || {
+  first: {
+    goalName: "",
+    completed: false,
+  },
+  second: {
+    goalName: "",
+    completed: false,
+  },
+  third: {
+    goalName: "",
+    completed: false,
+  },
+};
 let completedGoalsCount = Object.values(allGoals).filter(
   (goal) => goal.completed
 ).length;
