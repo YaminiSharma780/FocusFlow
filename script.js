@@ -4,6 +4,14 @@ const errorLabel = document.querySelector(".error-label");
 const progressBar = document.querySelector(".progress-bar");
 const progressValue = document.querySelector(".progress-value");
 const progressSpan = document.querySelector("progress-span");
+const progressBarLabel = document.querySelector("#progress-bar-label");
+
+const allProgressLabels = [
+  "Raise the bar by completing your goals!",
+  "Well begun is half done!",
+  "Just a step away, keep going!",
+  "Whoa! You just completed all the goals, time for chill :D",
+];
 
 const allGoals = JSON.parse(localStorage.getItem("allGoals")) || {};
 let completedGoalsCount = Object.values(allGoals).filter(
@@ -11,6 +19,7 @@ let completedGoalsCount = Object.values(allGoals).filter(
 ).length;
 progressValue.style.width = `${(completedGoalsCount / 3) * 100}%`;
 progressValue.textContent = `${completedGoalsCount}/3 Completed`;
+progressBarLabel.textContent = `${allProgressLabels[completedGoalsCount]}`;
 if (completedGoalsCount == 0) {
   progressValue.style.padding = 0;
 } else {
@@ -65,6 +74,7 @@ checkBoxList.forEach((checkbox) => {
 
       progressValue.style.width = `${(completedGoalsCount / 3) * 100}%`;
       progressValue.textContent = `${completedGoalsCount}/3 Completed`;
+      progressBarLabel.textContent = `${allProgressLabels[completedGoalsCount]}`;
       if (completedGoalsCount == 0) {
         progressValue.style.padding = 0;
       } else {
