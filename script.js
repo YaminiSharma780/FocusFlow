@@ -20,10 +20,13 @@ let completedGoalsCount = Object.values(allGoals).filter(
 progressValue.style.width = `${(completedGoalsCount / 3) * 100}%`;
 progressValue.textContent = `${completedGoalsCount}/3 Completed`;
 progressBarLabel.textContent = `${allProgressLabels[completedGoalsCount]}`;
+
 if (completedGoalsCount == 0) {
   progressValue.style.padding = 0;
+  progressValue.style.visibility = "hidden";
 } else {
   progressValue.style.padding = "0 20px";
+  progressValue.style.visibility = "visible";
 }
 
 inputFields.forEach((input) => {
@@ -77,8 +80,10 @@ checkBoxList.forEach((checkbox) => {
       progressBarLabel.textContent = `${allProgressLabels[completedGoalsCount]}`;
       if (completedGoalsCount == 0) {
         progressValue.style.padding = 0;
+        progressValue.style.visibility = "hidden";
       } else {
         progressValue.style.padding = "0 20px";
+        progressValue.style.visibility = "visible";
       }
 
       console.log(allGoals[inputID].goalName, allGoals[inputID].completed);
