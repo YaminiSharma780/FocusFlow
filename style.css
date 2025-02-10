@@ -16,7 +16,6 @@ body {
 }
 
 main {
-    /* margin: 20px; */
     padding: 0 16px;
 }
 
@@ -30,7 +29,6 @@ main {
 }
 
 .app-container h1 {
-    /* text-align: center; */
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -38,7 +36,6 @@ main {
 #subtitle {
     font-size: 32px;
     margin: 0;
-    /* added */
     display: flex;
 }
 
@@ -58,7 +55,7 @@ main {
     height: 30px;
     background-color: rgb(247, 249, 246);
     margin-bottom: 30px;
-    overflow: hidden;
+    padding-right: 40px;
 }
 
 .progress-value {
@@ -70,8 +67,6 @@ main {
     color: rgb(247, 249, 246);
     display: flex;
     align-items: center;
-    padding: 0;
-    margin: 0;
 }
 
 .error-label {
@@ -143,7 +138,6 @@ main {
     margin: 0;
 }
 
-/* only sun-frame will rotate */
 #image-container {
     position: relative;
     margin: 0;
@@ -163,7 +157,6 @@ main {
     animation: rotation 5s infinite linear;
 }
 
-/* when task is completed */
 .completed .custom-checkbox {
     background-color: rgb(79, 127, 60);
     border-color: rgb(79, 127, 60);
