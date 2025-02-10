@@ -6,24 +6,48 @@ const progressValue = document.querySelector(".progress-value");
 const progressSpan = document.querySelector("progress-span");
 
 const allGoals = JSON.parse(localStorage.getItem("allGoals")) || {};
+let completedGoalsCount = Object.values(allGoals).filter(
+  (goal) => goal.completed
+).length;
+progressValue.style.width = `${(completedGoalsCount / 3) * 100}%`;
+progressValue.textContent = `${completedGoalsCount}/3 Completed`;
+if (completedGoalsCount == 0) {
+  progressValue.style.padding = 0;
+} else {
+  progressValue.style.padding = "0 20px";
+}
 
-// const allGoals = {
-//   first: {
-//     goalName: "Learn JavaScript",
-//     completed: false,
-//   },
-//   second: {
-//     goalName: "Learn React",
-//     completed: false,
-//   },
-//   third: {
-//     goalName: "Learn NextJS",
-//     completed: false,
-//   },
-// };
+inputFields.forEach((input) => {
+  // fetching goal names from localStorage
+  console.log(allGoals[input.id]);
+  input.value = allGoals[input.id].goalName;
+  // steps to append completed class in goal-container when current goal is completed
+  if (allGoals[input.id].completed == true) {
+    input.parentElement.classList.add("completed");
+  }
 
-let barValue = 0;
-let barPercentage = 33.33;
+  input.addEventListener("input", (e) => {
+    console.log(input.id, input.value);
+
+    // preventing completed goal from getting edited
+    // only edit it when you untick it which means it's not completed
+    if (allGoals[input.id].completed == true) {
+      input.disabled = e.target;
+      return;
+    }
+
+    // steps to add new goal in localStorage
+    allGoals[input.id] = {
+      goalName: input.value,
+      completed: false,
+    };
+    localStorage.setItem("allGoals", JSON.stringify(allGoals));
+  });
+  // remove error when input field is clicked
+  input.addEventListener("focus", () => {
+    progressBar.classList.remove("show-error");
+  });
+});
 
 checkBoxList.forEach((checkbox) => {
   checkbox.addEventListener("click", (e) => {
@@ -32,41 +56,57 @@ checkBoxList.forEach((checkbox) => {
     });
 
     if (allGoalsAdded) {
-      if (checkbox.parentElement.classList.contains("completed")) {
-        checkbox.parentElement.classList.remove("completed");
-        barValue--;
-        if (barValue == 0) {
-          progressValue.style.padding = 0;
-        }
+      // steps to set completed:true in currentGoal of allGoals in localStorage
+      const inputID = checkbox.nextElementSibling.id;
+      allGoals[inputID].completed = !allGoals[inputID].completed;
+      completedGoalsCount = Object.values(allGoals).filter(
+        (goal) => goal.completed
+      ).length;
+
+      progressValue.style.width = `${(completedGoalsCount / 3) * 100}%`;
+      progressValue.textContent = `${completedGoalsCount}/3 Completed`;
+      if (completedGoalsCount == 0) {
+        progressValue.style.padding = 0;
       } else {
-        checkbox.parentElement.classList.add("completed");
-        barValue++;
         progressValue.style.padding = "0 20px";
       }
-      progressValue.textContent = `${barValue}/3 Completed`;
-      progressValue.style.width = `${barPercentage * barValue}%`;
+
+      console.log(allGoals[inputID].goalName, allGoals[inputID].completed);
+      localStorage.setItem("allGoals", JSON.stringify(allGoals));
+
+      // steps to toggle completed class in goal-container
+      if (checkbox.parentElement.classList.contains("completed")) {
+        checkbox.parentElement.classList.remove("completed");
+      } else {
+        checkbox.parentElement.classList.add("completed");
+      }
     } else {
-      console.log(progressBar.classList);
+      // appending show-error class in progressBar
       progressBar.classList.add("show-error");
     }
   });
 });
 
-inputFields.forEach((input) => {
-  console.log(allGoals[input.id]);
-  input.value = allGoals[input.id].goalName;
-  if (allGoals[input.id].completed == true) {
-    input.parentElement.classList.add("completed");
-  }
-  input.addEventListener("focus", () => {
-    progressBar.classList.remove("show-error");
-  });
-  input.addEventListener("input", (e) => {
-    console.log(input.id, input.value);
-    allGoals[input.id] = {
-      goalName: input.value,
-      completed: false,
-    };
-    localStorage.setItem("allGoals", JSON.stringify(allGoals));
-  });
-});
+// inputFields.forEach((input) => {
+//   // fetching goal names from localStorage
+//   console.log(allGoals[input.id]);
+//   input.value = allGoals[input.id].goalName;
+//   // steps to append completed class in goal-container when current goal is completed
+//   if (allGoals[input.id].completed == true) {
+//     input.parentElement.classList.add("completed");
+//     barValue = barValue + 1;
+//   }
+//   // steps to add new goal in localStorage
+//   input.addEventListener("input", (e) => {
+//     console.log(input.id, input.value);
+//     allGoals[input.id] = {
+//       goalName: input.value,
+//       completed: false,
+//     };
+//     localStorage.setItem("allGoals", JSON.stringify(allGoals));
+//   });
+//   // remove error when input field is clicked
+//   input.addEventListener("focus", () => {
+//     progressBar.classList.remove("show-error");
+//   });
+// });
