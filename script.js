@@ -7,13 +7,14 @@ const progressSpan = document.querySelector("progress-span");
 const progressBarLabel = document.querySelector("#progress-bar-label");
 
 const allProgressLabels = [
-  "Raise the bar by completing your goals!",
-  "Well begun is half done!",
-  "Just a step away, keep going!",
-  "Whoa! You just completed all the goals, time for chill :D",
+  "Raise the bar by finishing goals! had breakfast ?",
+  "Well begun is half done! the goal is not too far!",
+  "Ready to perform next goal ? drink plenty of water",
+  "Just a step away, keep going! and stretch muscles",
+  "Whoa! You just completed all the goals, time to relax",
 ];
 
-// when we are sending empty object {} then we will get error 
+// when we are sending empty object {} then we will get error
 // in this code -->> input.value = allGoals[input.id].goalName;
 const allGoals = JSON.parse(localStorage.getItem("allGoals")) || {
   first: {
@@ -28,12 +29,18 @@ const allGoals = JSON.parse(localStorage.getItem("allGoals")) || {
     goalName: "",
     completed: null,
   },
+  fourth: {
+    goalName: "",
+    completed: null,
+  },
 };
 let completedGoalsCount = Object.values(allGoals).filter(
   (goal) => goal.completed
 ).length;
-progressValue.style.width = `${(completedGoalsCount / inputFields.length) * 100}%`;
-progressValue.textContent = `${completedGoalsCount}/${inputFields.length} Completed`;
+progressValue.style.width = `${
+  (completedGoalsCount / inputFields.length) * 100
+}%`;
+progressValue.textContent = `${completedGoalsCount}/${inputFields.length}`;
 progressBarLabel.textContent = `${allProgressLabels[completedGoalsCount]}`;
 
 if (completedGoalsCount == 0) {
@@ -50,6 +57,7 @@ inputFields.forEach((input) => {
   input.value = allGoals[input.id].goalName;
   // steps to append completed class in goal-container when current goal is completed
   if (allGoals[input.id].completed == true) {
+    input.disabled = true;
     input.parentElement.classList.add("completed");
   }
 
@@ -58,8 +66,7 @@ inputFields.forEach((input) => {
 
     // preventing completed goal from getting edited
     // only edit it when you untick it which means it's not completed
-    if (allGoals[input.id].completed == true) {
-      input.disabled = e.target;
+    if (allGoals[input.id].completed === true) {
       return;
     }
 
@@ -90,8 +97,10 @@ checkBoxList.forEach((checkbox) => {
         (goal) => goal.completed
       ).length;
 
-      progressValue.style.width = `${(completedGoalsCount / inputFields.length) * 100}%`;
-      progressValue.textContent = `${completedGoalsCount}/${inputFields.length} Completed`;
+      progressValue.style.width = `${
+        (completedGoalsCount / inputFields.length) * 100
+      }%`;
+      progressValue.textContent = `${completedGoalsCount}/${inputFields.length}`;
       progressBarLabel.textContent = `${allProgressLabels[completedGoalsCount]}`;
       if (completedGoalsCount == 0) {
         progressValue.style.padding = 0;
@@ -107,36 +116,17 @@ checkBoxList.forEach((checkbox) => {
       // steps to toggle completed class in goal-container
       if (checkbox.parentElement.classList.contains("completed")) {
         checkbox.parentElement.classList.remove("completed");
+        // Enable the input field if goal is marked as incomplete
+        const input = document.querySelector(`#${inputID}`);
+        input.disabled = false;
       } else {
         checkbox.parentElement.classList.add("completed");
+        // Disable the input field if goal is marked as completed
+        const input = document.querySelector(`#${inputID}`);
+        input.disabled = true;
       }
     } else {
-      // appending show-error class in progressBar
       progressBar.classList.add("show-error");
     }
   });
 });
-
-// inputFields.forEach((input) => {
-//   // fetching goal names from localStorage
-//   console.log(allGoals[input.id]);
-//   input.value = allGoals[input.id].goalName;
-//   // steps to append completed class in goal-container when current goal is completed
-//   if (allGoals[input.id].completed == true) {
-//     input.parentElement.classList.add("completed");
-//     barValue = barValue + 1;
-//   }
-//   // steps to add new goal in localStorage
-//   input.addEventListener("input", (e) => {
-//     console.log(input.id, input.value);
-//     allGoals[input.id] = {
-//       goalName: input.value,
-//       completed: false,
-//     };
-//     localStorage.setItem("allGoals", JSON.stringify(allGoals));
-//   });
-//   // remove error when input field is clicked
-//   input.addEventListener("focus", () => {
-//     progressBar.classList.remove("show-error");
-//   });
-// });

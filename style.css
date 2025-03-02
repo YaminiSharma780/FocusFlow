@@ -4,7 +4,7 @@ body {
 }
 
 #title {
-    font-size: 45px;
+    font-size: 30px;
     text-align: center;
     margin-top: 0;
     margin-bottom: 10px;
@@ -34,7 +34,7 @@ main {
 }
 
 #subtitle {
-    font-size: 32px;
+    font-size: 20px;
     margin: 0;
     display: flex;
 }
@@ -47,7 +47,8 @@ main {
 
 #progress-bar-label {
     font-size: 14px;
-    color: #545353;
+    color: #545353; 
+    max-height: 100px;
 }
 
 .progress-bar {
@@ -85,7 +86,7 @@ main {
 .goal-container {
     border: 1px solid #cfcdcd;
     border-radius: 15px;
-    height: 50px;
+    height: 40px;
     display: flex;
     align-items: center;
     padding: 0;
@@ -183,6 +184,25 @@ main {
     text-decoration: line-through;
 }
 
+.add-new-goal-btn {
+    border: 1px solid #cfcdcd;
+    border-radius: 15px;
+    height: 40px;
+    background-color: rgb(87, 163, 64);
+    margin-bottom: 30px;
+    font-family: inherit;
+    color: antiquewhite;
+    font-size: 18px;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-new-goal-btn:hover {
+    cursor: pointer;
+}
+
 @keyframes rotation {
     from {
         transform: rotate(0deg);
@@ -195,18 +215,18 @@ main {
 
 @media (max-width: 768px) {
     #title {
-        font-size: 32px;
+        font-size: 25px;
         margin-top: 0;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
 
     #subtitle {
-        font-size: 20px;
+        font-size: 15px;
     }
 
     .app-container {
-        padding: 16px 24px;
-        margin: 30px 50px;
+        padding: 10px 20px;
+        margin: 10px 50px;
     }
 
     #sun {
