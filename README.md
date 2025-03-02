@@ -1,1 +1,3 @@
 FocusFlow is a simple productivity app that helps users set and track up to four daily goals. Built with JavaScript, HTML, and CSS, it stores data locally in the browser for easy access. As users complete their goals, FocusFlow displays cute, motivational messages to keep them motivated. With its clean, minimalist design, FocusFlow makes goal-setting easy and rewarding every day.
+
+App Link : https://focus-floww.netlify.app/
